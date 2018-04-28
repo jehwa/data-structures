@@ -21,20 +21,19 @@ treeMethods.addChild = function(value) {
 
 treeMethods.contains = function(target) {
   var output = false;
-  // debugger;
-  var targetFinder = function(trees) {
 
-    if (trees.value === target) {
-      output = true;
-    }
-    if (trees.children.length) {
-      _.each(trees.children, function(child) {
-        targetFinder(child);
-      });
+  if(this.value === target) {
+    return true;
+  }
 
-    }
-  };
-  targetFinder(this);
+  if(this.children.length) {
+    _.each(this.children, function(child) {
+      if(child.contains(target)) {
+        output = true;
+      }
+    });
+  }
+
   return output;
 };
 
