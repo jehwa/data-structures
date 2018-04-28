@@ -13,7 +13,7 @@ var Tree = function(value) {
 var treeMethods = {};
 
 treeMethods.addChild = function(value) {
-  if(this.children) {
+  if (this.children) {
     this.children.push(new Tree(value));
   }
 
