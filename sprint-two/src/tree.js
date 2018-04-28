@@ -22,13 +22,13 @@ treeMethods.addChild = function(value) {
 treeMethods.contains = function(target) {
   var output = false;
 
-  if(this.value === target) {
+  if (this.value === target) {
     return true;
   }
 
-  if(this.children.length) {
+  if (this.children.length) {
     _.each(this.children, function(child) {
-      if(child.contains(target)) {
+      if (child.contains(target)) {
         output = true;
       }
     });
