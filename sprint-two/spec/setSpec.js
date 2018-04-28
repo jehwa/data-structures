@@ -23,5 +23,9 @@ describe('set', function() {
     set.remove('Mel Gibson');
     expect(set.contains('Mel Gibson')).to.equal(false);
   });
+  it('should not contain values that were not added', function() {
+    set.add('Gavin Shriver');
+    expect(set.contains('Jehwa Shin')).to.equal(false);
+  });
 
 });

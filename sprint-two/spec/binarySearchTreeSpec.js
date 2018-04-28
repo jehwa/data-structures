@@ -37,4 +37,13 @@ describe('binarySearchTree', function() {
     binarySearchTree.depthFirstLog(func);
     expect(array).to.eql([5, 2, 3, 7]);
   });
+  it('left subtree\'s bigger values should be smaller than right subtree\'s smaller values', function() {
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(7);
+    binarySearchTree.insert(4);
+    binarySearchTree.insert(6);
+    // debugger;
+    // console.log(binarySearchTree);
+    expect(binarySearchTree.left.right.value < binarySearchTree.right.left.value).to.equal(true);
+  });
 });
