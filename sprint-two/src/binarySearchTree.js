@@ -12,65 +12,60 @@ var BinarySearchTree = function(value) {
 var binaryMethods = {};
 
 binaryMethods.insert = function(value) {
-  var mother = this;
-  // debugger;
-  // console.log(new BinarySearchTree(value));
-  var findChildren = function(child) {
-    // console.log(child);
-    if (mother.value > child.value && !mother.left) {
-      mother.left = child;
-      // console.log(mother.left);
-    }
-    if (mother.value > child.value && mother.left) {
-      mother = mother.left;
-      findChildren(child);
-    }
-    if (mother.value < child.value && !mother.right) {
-      mother.right = child;
-    }
-    if (mother.value < child.value && mother.right) {
-      mother = mother.right;
-      findChildren(child);
-    }
-  };
-  var newNode = new BinarySearchTree(value);
-  findChildren(newNode);
+
+  if (!this.left && this.value > value) {
+    this.left = new BinarySearchTree(value);
+  }
+  if (this.left && this.value > value) {
+    // console.log(this.left);
+    return this.left.insert(value);
+  }
+  if (!this.right && this.value < value) {
+    this.right = new BinarySearchTree(value);
+  }
+  if (this.right && this.value < value) {
+    return this.right.insert(value);
+  }
+
 };
 
 binaryMethods.contains = function(val) {
-  let output = false;
-  // debugger;
-  var findVal = function(node) {
-    if (node && node.value === val) {
-      // console.log(true);
-      output = true;
-    }
-    if (node && node.value > val) {
-      findVal(node.left);
-    }
-    if (node && node.value < val) {
-      findVal(node.right);
-    }
 
-  };
-  findVal(this);
-  return output;
+  if (this.value === val) {
+    return true;
+  }
+  if (this.value > val && this.left) {
+    return this.left.contains(val);
+  }
+  if (this.value < val && this.right) {
+    return this.right.contains(val);
+  }
+
+  return false;
 };
 
-binaryMethods.depthFirstLog = function(fuc) {
+binaryMethods.depthFirstLog = function(cb) {
 
-  var findAll = function(node) {
-    if (node.value) {
-      fuc(node.value);
-    }
-    if (node.left) {
-      findAll(node.left);
-    }
-    if (node.right) {
-      findAll(node.right);
-    }
-  };
-  findAll(this);
+  cb(this.value);
+
+  if (this.left) {
+    this.left.depthFirstLog(cb);
+  }
+  if (this.right) {
+    this.right.depthFirstLog(cb);
+  }
+  // var findAll = function(node) {
+  //   if (node.value) {
+  //     cb(node.value);
+  //   }
+  //   if (node.left) {
+  //     findAll(node.left);
+  //   }
+  //   if (node.right) {
+  //     findAll(node.right);
+  //   }
+  // };
+  // findAll(this);
 };
 
 
