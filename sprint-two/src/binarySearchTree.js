@@ -77,4 +77,7 @@ binaryMethods.depthFirstLog = function(fuc) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ insert: O(log(n));
+ contain: O(log(n));
+ depthFirstLog: O(n);
  */
