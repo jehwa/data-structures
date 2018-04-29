@@ -6,7 +6,8 @@ var LinkedList = function() {
   // list.storage = {};
 
   list.addToTail = function(value) {
-    var newVal = new Node(value);
+    var newNode = new Node(value);
+    var newVal = _.extend(newNode, this.contains);
     // storage[newValvalue] = value;
     if (this.tail) {
       this.tail.next = newVal;
@@ -24,27 +25,22 @@ var LinkedList = function() {
     }
     return previousHead.value;
 
-
-    
-
   };
 
-  list.contains = function(target) {
+  list.contains = function(target, currentNode) {
     var output = false;
+    currentNode = currentNode || this.head;
 
-    // debugger;
-    var findTarget = function(head) {
-      if (head.value === target) {
+    if (currentNode.value === target) {
+      return true;
+    }
+    if (currentNode.next) {
+      if (this.contains(target, currentNode.next)) {
         output = true;
       }
-      if (head.next) {
-        findTarget(head.next);
-      }
-    };
+    }
 
-    findTarget(this.head);
     return output;
-
   };
 
   return list;
@@ -55,7 +51,6 @@ var Node = function(value) {
 
   node.value = value;
   node.next = null;
-
   return node;
 };
 
